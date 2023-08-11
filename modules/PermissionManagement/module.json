@@ -1,0 +1,13 @@
+{
+    "name": "PermissionManagement",
+    "alias": "permissionmanagement",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PermissionManagement\\app\\Providers\\PermissionManagementServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

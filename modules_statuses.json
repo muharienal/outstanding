@@ -1,0 +1,11 @@
+{
+    "Dashboard": true,
+    "MenuManagement": true,
+    "PermissionManagement": true,
+    "UserManagement": true,
+    "Setting": true,
+    "Report": true,
+    "Infrastructure": true,
+    "Revision": true,
+    "Notivication": true
+}

@@ -1,0 +1,11 @@
+{
+    "name": "Revision",
+    "alias": "revision",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Revision\\app\\Providers\\RevisionServiceProvider"
+    ],
+    "files": []
+}

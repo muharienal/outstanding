@@ -1,0 +1,11 @@
+{
+    "name": "Notivication",
+    "alias": "notivication",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Notivication\\app\\Providers\\NotivicationServiceProvider"
+    ],
+    "files": []
+}
