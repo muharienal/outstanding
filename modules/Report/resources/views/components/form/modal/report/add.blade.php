@@ -41,11 +41,11 @@
                         <input type="text" class="form-control" id="tanggal_input" name="tanggal_input" value="{{ now()->format('d/m/Y') }}" readonly>
                         <x-form.validation.error name="tanggal_input" />
                     </div>
-                        <div class="mb-3">
-                            <label for="tanggal_mulai" class="form-label required-label">Tanggal Mulai</label>
-                            <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" required>
-                            <x-form.validation.error name="tanggal_mulai" />
-                        </div>
+                    <div class="mb-3">
+                        <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
+                        <input type="date" class="form-control date-input" id="tanggal_mulai" name="tanggal_mulai">
+                        <x-form.validation.error name="tanggal_mulai" />
+                    </div>
                     </div>
 
                     <div class="form-row">
@@ -104,22 +104,22 @@
                             <x-form.validation.error name="status_pekerjaan" />
                         </div>
                         <div class="mb-3">
-                            <label for="progress" class="form-label required-label">Progress</label>
-                            <input type="text" class="form-control" id="progress" name="progress" pattern="^\d{1,3}%$" title="Masukkan angka antara 0 dan 100 diikuti dengan %" required>
+                            <label for="progress" class="form-label">Progress</label>
+                            <input type="text" class="form-control" id="progress" name="progress" pattern="^\d{1,3}%$" title="Masukkan angka antara 0 dan 100 diikuti dengan %">
                             <div class="invalid-feedback">
                                 Masukkan angka antara 0 dan 100 diikuti dengan %.
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="target" class="form-label required-label">Target</label>
-                            <input type="date" class="form-control" name="target" id="target" required>
+                            <label for="target" class="form-label">Target</label>
+                            <input type="date" class="form-control" name="target" id="target">
                             <x-form.validation.error name="target" />
                         </div>
 
                         <div class="mb-3">
-                            <label for="wo_number" class="form-label required-label">WO Number</label>
-                            <input class="form-control" name="wo_number" id="wo_number" required></input>
+                            <label for="wo_number" class="form-label">WO Number</label>
+                            <input class="form-control" name="wo_number" id="wo_number"></input>
                             <x-form.validation.error name="wo_number" />
                         </div>
                     </div>
@@ -132,8 +132,8 @@
 
                     <div class="form-row">
                         <div class="mb-3">
-                            <label for="scope_1" class="form-label required-label">Scope 1</label>
-                            <select class="form-select" id="scope_1" name="scope_1" data-choices data-choices-removeItem required>
+                            <label for="scope_1" class="form-label">Scope 1</label>
+                            <select class="form-select" id="scope_1" name="scope_1" data-choices data-choices-removeItem>
                                 <option value="Mekanik">Mekanik</option>
                                 <option value="Listrik">Listrik</option>
                                 <option value="Instrumen">Instrumen</option>
@@ -155,8 +155,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="pic" class="form-label required-label">PIC</label>
-                            <select class="form-select" id="pic" name="pic" data-choices data-choices-removeItem required>
+                            <label for="pic" class="form-label">PIC</label>
+                            <select class="form-select" id="pic" name="pic" data-choices data-choices-removeItem>
                                 <option value="Viki">Viki</option>
                                 <option value="Faqih">Faqih</option>
                                 <option value="Yunianton">Yunianton</option>
@@ -172,8 +172,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="prioritas" class="form-label required-label">Prioritas</label>
-                            <select class="form-select" id="prioritas" name="prioritas" data-choices data-choices-removeItem required>
+                            <label for="prioritas" class="form-label">Prioritas</label>
+                            <select class="form-select" id="prioritas" name="prioritas" data-choices data-choices-removeItem>
                                 <option value="Emergency">Emergency</option>
                                 <option value="High">High</option>
                                 <option value="Medium">Medium</option>
@@ -184,14 +184,24 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="upload_foto" class="form-label">Upload Foto</label>
-                        <input id="upload_foto" name="upload_foto[]" type="file" class="filepond filepond-input-multiple form-control" multiple data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                        <label class="form-label">Upload Foto</label>
+                        <div class="input-group">
+                            <input name="upload_foto[]" type="file" class="form-control" accept="image/*">
+                        </div>
                         <x-form.validation.error name="upload_foto" />
                     </div>
 
                     <div class="mb-3">
-                        <label for="upload_document" class="form-label">Upload Document</label>
-                        <input id="upload_document" name="upload_document[]" type="file" class="filepond filepond-input-multiple form-control" multiple data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                        <div class="input-group">
+                            <input name="upload_foto[]" type="file" class="form-control" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Upload Document</label>
+                        <div class="input-group">
+                            <input name="upload_document[]" type="file" class="form-control" accept=".pdf,.doc,.docx">
+                        </div>
                         <x-form.validation.error name="upload_document" />
                     </div>
 

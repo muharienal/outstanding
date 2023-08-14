@@ -61,15 +61,18 @@
             <div class="modal-body">
 
             <div class="form-row">
-                <div class="mb-3 ">
+                <div class="mb-3">
                     <label for="tanggal_input" class="form-label">Tanggal Input</label>
-                    <input type="date" class="form-control" id="tanggal_input" name="tanggal_input" value="{{ \Carbon\Carbon::parse($report->tanggal_input)->format('d/m/Y') }}" readonly>
+                    @php
+                        $formattedDate = \DateTime::createFromFormat('d/m/Y', $report->tanggal_input)->format('Y-m-d');
+                    @endphp
+                    <input type="date" class="form-control" id="tanggal_input" name="tanggal_input" value="{{ $formattedDate }}" readonly>
                     <x-form.validation.error name="tanggal_input" />
                 </div>
 
                 <div class="mb-3">
                     <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
-                    <input type="text" class="form-control" id="tanggal_mulai" name="tanggal_mulai" value="{{ \Carbon\Carbon::parse($report->tanggal_mulai)->format('d/m/Y') }}" readonly>
+                    <input type="text" class="form-control" id="tanggal_mulai" name="tanggal_mulai" value="{{ $report->tanggal_mulai ? date('d/m/Y', strtotime($report->tanggal_mulai)) : '' }}" readonly>
                     <x-form.validation.error name="tanggal_mulai" />
                 </div>
             </div>
@@ -129,7 +132,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="target" class="form-label">Target</label>
-                    <input type="text" class="form-control" id="target" name="target" value="{{ \Carbon\Carbon::parse($report->target)->format('d/m/Y') }}" readonly>
+                    <input type="text" class="form-control" id="target" name="target" value="{{ $report->target ? date('d/m/Y', strtotime($report->target)) : '' }}" readonly>
                     <x-form.validation.error name="target" />
                 </div>
                 
