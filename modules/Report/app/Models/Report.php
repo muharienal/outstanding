@@ -87,13 +87,13 @@ class Report extends Model
 
         switch ($status_pekerjaan) {
             case 'Rutin':
-                return 'primary';
+                return '#59B44D';
             case 'IP':
-                return 'warning';
+                return '#FEB300';
             case 'OK':
-                return 'success';
+                return '#07834D';
             case 'Belum':
-                return 'danger';
+                return '#C1D2CA';
             default:
                 return '';
         }
@@ -108,13 +108,13 @@ class Report extends Model
 
         switch ($prioritas) {
             case 'Medium':
-                return 'warning';
+                return '#7EB45F';
             case 'Low':
-                return 'success';
+                return '#FCD208';
             case 'High':
-                return 'primary';
+                return '#FCA427';
             case 'Emergency':
-                return 'danger';
+                return '#F44336';
             default:
                 return '';
         }
@@ -129,9 +129,9 @@ class Report extends Model
 
         switch ($show_status) {
             case 'Show':
-                return 'success';
+                return '#7EB45F';
             case 'Hide':
-                return 'danger';
+                return '#F44336';
             default:
                 return '';
         }

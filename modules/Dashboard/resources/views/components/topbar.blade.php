@@ -1,23 +1,16 @@
-<header id="page-topbar">
+<header id="page-topbar" style="zoom: 0.9;">
     <div class="navbar-header">
         <div class="d-flex align-items-center">
-            <!-- LOGO -->
-            <div class="navbar-brand-box">
-                <a href="{{ route('dashboard.index') }}" class="logo logo-light">
-                    <img src="/assets/images/logo_project.png" alt="" height="50">
-                </a>
-            </div>
-
-            <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
-                <i class="fa fa-fw fa-bars"></i>
-            </button>
+            <h2 class="text-white" style="position: fixed;">@yield('title')</h2>
         </div>
 
         <div class="d-flex">
-
+        <div class="ms-2" id="currentDateContainer"></div>
             <div class="dropdown d-none d-lg-inline-block ms-1">
-                <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
-                    <i class="bx bx-fullscreen"></i>
+                <button type="button" class="btn header-item noti-icon" data-bs-toggle="fullscreen">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 36 36" fill="none">
+                        <path d="M12 28.5002V24.0002H7.5V21.0002H15V28.5002H12ZM21 28.5002V21.0002H28.5V24.0002H24V28.5002H21ZM7.5 15.0002V12.0002H12V7.50024H15V15.0002H7.5ZM21 15.0002V7.50024H24V12.0002H28.5V15.0002H21Z" fill="white"/>
+                    </svg>
                 </button>
             </div>
 
@@ -63,10 +56,10 @@
             </div>
 
             <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn header-item" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="{{ $user->avatar ? asset('assets/user/image/' . $user->avatar) : '/assets/images/users/avatar-1.jpg' }}" alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{ $user->name }}</span>
-                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                    <span class="d-none d-xl-inline-block ms-1" key="t-henry" style="color: #FFF; font-style: normal; font-weight: 400; line-height: normal; letter-spacing: 0.88px;">{{ $user->name }}</span>
+                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block" style="color: white;"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
@@ -124,3 +117,79 @@
         </div>
     </div>
 </div>
+
+<style>
+    #page-topbar {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 90; /* Lower z-index value for the topbar */
+    background: linear-gradient(90deg, #FEB300 0%, #07834D 100%);
+    box-shadow: 0px 20px 30px -12px rgba(0, 0, 0, 0.16);
+    }
+    
+    #page-topbar .navbar-header {
+        display: flex;
+        align-items: center; /* Center vertically */
+        justify-content: space-between;
+    }
+
+    #page-topbar h2 {
+        margin: 0;
+        color: #FFF;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: normal;
+    }
+
+    #page-topbar .d-flex.align-items-center {
+        display: flex;
+        align-items: center;
+        margin-left: 280px; /* Add margin to this element */
+        margin-top: -11px;
+    }
+
+    #page-topbar .d-flex {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        margin-top: -11px;
+    }
+
+    /* Remove hover effect and other styles */
+    #page-header-user-dropdown:hover,
+    #page-header-user-dropdown:focus {
+        background-color: initial;
+        box-shadow: none;
+        border: none;
+    }
+</style>
+
+<script>
+    // Get the current date
+    var currentDate = new Date();
+
+    // Define an array of Indonesian day and month names
+    var indonesianDayNames = [
+        'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'
+    ];
+    var indonesianMonthNames = [
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ];
+
+    // Get the day, day name, month, and year
+    var day = currentDate.getDate();
+    var dayName = indonesianDayNames[currentDate.getDay()];
+    var month = currentDate.getMonth();
+    var year = currentDate.getFullYear();
+
+    // Format the date
+    var formattedDate = dayName + ', ' + day + ' ' + indonesianMonthNames[month] + ' ' + year;
+
+    // Update the content of the currentDateContainer
+    document.getElementById('currentDateContainer').innerHTML = '<p class="mb-0 text-white">' + formattedDate + '</p>';
+</script>
