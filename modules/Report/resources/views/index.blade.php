@@ -3,6 +3,7 @@
 @section('title', 'Master Data')
 
 @section('content')
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Noto Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
@@ -77,6 +78,7 @@
         margin-top: -30px;
         margin-left: -30px;
         background-color: #EFEFEF; /* Set the base background color */
+        font-family: 'Noto Sans';
     }
 
     /* Adjust container padding to accommodate the negative margins */
@@ -125,7 +127,7 @@
         border: 1px solid #07834D;
         background: #FFF;
         color: #07834D;
-        padding-right: 10px; /* Add space for the custom icon */
+        padding-right: 40px; /* Add space for the custom icon */
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2307834D' viewBox='0 0 320 512'%3E%3Cpath d='M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right 10px center;
@@ -141,7 +143,7 @@
         border: 1px solid #07834D;
         background: #FFF;
         color: #07834D;
-        padding-right: 50px; /* Add space for the custom icon */
+        padding-right: 40px; /* Add space for the custom icon */
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2307834D' viewBox='0 0 320 512'%3E%3Cpath d='M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right 10px center;
@@ -176,8 +178,8 @@
     #tambahData {
         border-radius: 10px;
         border: 1px solid #FFF;
-        background: linear-gradient(180deg, #06693E 0%, #50A245 100%);
-        box-shadow: 0px -4px 8px 0px rgba(0, 0, 0, 0.14) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        background: linear-gradient(180deg, #BF8600 0%, #FEB300 100%);
+        box-shadow: 0px -2px 8px 0px rgba(0, 0, 0, 0.10) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         color: #FFF;
         font-size: 14px; /* Adjust the font size as needed */
         text-decoration: none; /* Remove the default underline */
@@ -187,8 +189,8 @@
 
     /* Add a hover effect */
     #tambahData:hover {
-        background: linear-gradient(180deg, #50A245 0%, #06693E 100%);
-        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.14) inset, 0px -4px 4px 0px rgba(0, 0, 0, 0.25);
+        background: linear-gradient(180deg, #BF8600 0%, #FEB300 100%);
+        box-shadow: 0px -2px 8px 0px rgba(0, 0, 0, 0.10) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
 
     /* Remove the default focus outline */
@@ -232,6 +234,14 @@
         color: black;
     }
 
+    #reports-table tbody tr {
+        height: 55px; /* Set the desired height */
+    }
+
+    #reports-table tbody td {
+        vertical-align: middle;
+    }
+
     /* Change font color for search bar */
     .dataTables_filter input {
         color: black;
@@ -253,6 +263,8 @@
     }
 
     .card.mt-4 {
+        margin-left: 15px;
+        margin-right: 5px;
         border-radius: 19.784px;
         background: #FFF;
         box-shadow: 0px 4.946048736572266px 72.95421600341797px 0px rgba(50, 50, 71, 0.06), 0px 4.946048736572266px 127.3607406616211px 0px rgba(50, 50, 71, 0.01);
@@ -272,7 +284,7 @@
             </div>
             <div class="d-flex flex-column me-2">
                 <select id="unitFilter" class="form-select">
-                    <option value="">All Unit</option>
+                    <option value="">All Units</option>
                     <option value="PA I">PA I</option>
                     <option value="PA II">PA II</option>
                     <option value="SASU I">SASU I</option>
@@ -285,7 +297,7 @@
             </div>
             <div class="d-flex flex-column me-2"> <!-- Third set of filters -->
                 <select id="statusFilter" class="form-select">
-                    <option value="">All Status Pekerjaan</option>
+                    <option value="">All Job Status</option>
                     <option value="Rutin">Rutin</option>
                     <option value="IP">IP</option>
                     <option value="OK">OK</option>
@@ -294,7 +306,7 @@
             </div>
             <div class="d-flex flex-column"> <!-- Fourth set of filters -->
                 <select id="prioritasFilter" class="form-select">
-                    <option value="">All Prioritas</option>
+                    <option value="">All Priority</option>
                     <option value="Emergency">Emergency</option>
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
@@ -305,15 +317,15 @@
         </div>
         <div class="d-flex align-items-center"> <!-- Right-aligned content -->
             <div class="d-flex"> <!-- Flex container for buttons -->
+                <a href="#" id="printTable" class="btn btn-soft-primary btn-m me-2">
+                    <i class="fas fa-print"></i> Print
+                </a>
                 @if (auth()->user()->hasRole(['Planner', 'Super Admin']))
-                <button id="tambahData" type="button" class="btn btn-soft-success btn-m me-2" data-bs-toggle="modal" data-bs-target="#modal-form-add-report">
-                <i class="fas fa-plus-circle"></i>
+                <button id="tambahData" type="button" class="btn btn-soft-success btn-m" data-bs-toggle="modal" data-bs-target="#modal-form-add-report">
+                <i class="fas fa-file-medical"></i>
                     Tambah Data
                 </button>
                 @endif
-                <a href="#" id="printTable" class="btn btn-soft-primary btn-m">
-                    <i class="fas fa-print"></i> Print
-                </a>
             </div>
         </div>
     </div>
@@ -379,7 +391,10 @@
                 <td>
                     <div class="dropdown dropup">
                         <button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-lg"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" fill="none">
+                                <path d="M12.8 32.0001H19.2C25.2336 32.0001 28.2512 32.0001 30.1248 30.1265C32 28.2513 32 25.2321 32 19.2001C32 13.1681 32 10.1489 30.1248 8.27531C29.5456 7.69451 28.8544 7.29451 28 7.01771V11.4545C28.0048 11.9985 28.0144 12.9121 27.6224 13.7473C27.232 14.5825 26.5248 15.1617 26.1024 15.5073C26.0608 15.5393 26.0208 15.5729 25.9856 15.6033L23.5744 17.6113C22.1984 18.7601 20.9984 19.7585 19.92 20.4529C18.76 21.1985 17.504 21.7521 16 21.7521C14.496 21.7521 13.2416 21.1985 12.08 20.4513C11.0016 19.7585 9.8032 18.7601 8.4256 17.6129L6.0144 15.6033C5.97558 15.5712 5.93665 15.5392 5.8976 15.5073C5.4752 15.1617 4.7696 14.5825 4.3776 13.7473C3.9872 12.9121 3.9936 11.9985 3.9984 11.4545L4 11.3009V7.01611C3.1456 7.29291 2.4544 7.69451 1.8752 8.27531C-1.90735e-07 10.1489 0 13.1665 0 19.2001C0 25.2337 -1.90735e-07 28.2513 1.8752 30.1265C3.7488 32.0001 6.7664 32.0001 12.8 32.0001Z" fill="#595959"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.55186 13.76L9.85426 15.68C12.7935 18.128 14.2623 19.352 15.9999 19.352C17.7375 19.352 19.2079 18.128 22.1455 15.6784L24.4495 13.7584C25.0143 13.288 25.2975 13.0512 25.4495 12.7296C25.5999 12.4064 25.5999 12.0384 25.5999 11.3008V8C25.5999 7.488 25.5999 7.008 25.5967 6.5632C25.5775 3.7296 25.4399 2.184 24.4287 1.1712C23.2575 1.90735e-07 21.3727 0 17.5999 0H14.3999C10.6287 0 8.74386 1.90735e-07 7.57106 1.1712C6.55986 2.184 6.41906 3.7296 6.39986 6.5632C6.39666 7.0096 6.39986 7.4864 6.39986 8V11.3008C6.39986 12.0368 6.39986 12.4064 6.55186 12.7296C6.70226 13.0512 6.98386 13.288 7.55186 13.76ZM11.5999 6.4C11.5999 6.08174 11.7263 5.77652 11.9513 5.55147C12.1764 5.32643 12.4816 5.2 12.7999 5.2H19.1999C19.5181 5.2 19.8233 5.32643 20.0484 5.55147C20.2734 5.77652 20.3999 6.08174 20.3999 6.4C20.3999 6.71826 20.2734 7.02349 20.0484 7.24853C19.8233 7.47358 19.5181 7.6 19.1999 7.6H12.7999C12.4816 7.6 12.1764 7.47358 11.9513 7.24853C11.7263 7.02349 11.5999 6.71826 11.5999 6.4ZM13.1999 11.2C13.1999 10.8817 13.3263 10.5765 13.5513 10.3515C13.7764 10.1264 14.0816 10 14.3999 10H17.5999C17.9181 10 18.2233 10.1264 18.4484 10.3515C18.6734 10.5765 18.7999 10.8817 18.7999 11.2C18.7999 11.5183 18.6734 11.8235 18.4484 12.0485C18.2233 12.2736 17.9181 12.4 17.5999 12.4H14.3999C14.0816 12.4 13.7764 12.2736 13.5513 12.0485C13.3263 11.8235 13.1999 11.5183 13.1999 11.2Z" fill="#595959"/>
+                            </svg>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li>
@@ -409,7 +424,7 @@
                     @endphp
                     @empty
                         <tr>
-                            <td colspan="9" class="text-center">Belum Ada Data</td>
+                            <td colspan="9" class="text-center">No data available in table</td>
                         </tr>
                     @endforelse
                 </tbody>

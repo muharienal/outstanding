@@ -1,5 +1,11 @@
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Noto Sans'>
+
 <!-- Modals add menu -->
 <style>
+    body {
+        font-family: 'Noto Sans';
+    }
+
      /* Custom CSS to create a horizontal layout */
      .form-row {
         display: flex;
@@ -42,8 +48,8 @@
                         <x-form.validation.error name="tanggal_input" />
                     </div>
                     <div class="mb-3">
-                        <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
-                        <input type="date" class="form-control date-input" id="tanggal_mulai" name="tanggal_mulai">
+                        <label for="tanggal_mulai" class="form-label required-label">Tanggal Mulai</label>
+                        <input type="date" class="form-control date-input" id="tanggal_mulai" name="tanggal_mulai" required>
                         <x-form.validation.error name="tanggal_mulai" />
                     </div>
                     </div>
@@ -104,36 +110,36 @@
                             <x-form.validation.error name="status_pekerjaan" />
                         </div>
                         <div class="mb-3">
-                            <label for="progress" class="form-label">Progress</label>
-                            <input type="text" class="form-control" id="progress" name="progress" pattern="^\d{1,3}%$" title="Masukkan angka antara 0 dan 100 diikuti dengan %">
+                            <label for="progress" class="form-label required-label">Progress</label>
+                            <input type="text" class="form-control" id="progress" name="progress" pattern="^\d{1,3}%$" title="Masukkan angka antara 0 dan 100 diikuti dengan %" required>
                             <div class="invalid-feedback">
                                 Masukkan angka antara 0 dan 100 diikuti dengan %.
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="target" class="form-label">Target</label>
-                            <input type="date" class="form-control" name="target" id="target">
+                            <label for="target" class="form-label required-label">Target</label>
+                            <input type="date" class="form-control" name="target" id="target" required>
                             <x-form.validation.error name="target" />
                         </div>
 
                         <div class="mb-3">
-                            <label for="wo_number" class="form-label">WO Number</label>
-                            <input class="form-control" name="wo_number" id="wo_number"></input>
+                            <label for="wo_number" class="form-label required-label">WO Number</label>
+                            <input class="form-control" name="wo_number" id="wo_number" required></input>
                             <x-form.validation.error name="wo_number" />
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="keterangan" class="form-label">Keterangan</label>
-                        <textarea class="form-control" name="keterangan" id="keterangan"></textarea>
+                        <label for="keterangan" class="form-label required-label">Keterangan</label>
+                        <textarea class="form-control" name="keterangan" id="keterangan" required></textarea>
                         <x-form.validation.error name="keterangan" />
                     </div>
 
                     <div class="form-row">
                         <div class="mb-3">
-                            <label for="scope_1" class="form-label">Scope 1</label>
-                            <select class="form-select" id="scope_1" name="scope_1" data-choices data-choices-removeItem>
+                            <label for="scope_1" class="form-label required-label">Scope 1</label>
+                            <select class="form-select" id="scope_1" name="scope_1" data-choices data-choices-removeItem required>
                                 <option value="Mekanik">Mekanik</option>
                                 <option value="Listrik">Listrik</option>
                                 <option value="Instrumen">Instrumen</option>
@@ -155,8 +161,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="pic" class="form-label">PIC</label>
-                            <select class="form-select" id="pic" name="pic" data-choices data-choices-removeItem>
+                            <label for="pic" class="form-label required-label">PIC</label>
+                            <select class="form-select" id="pic" name="pic" data-choices data-choices-removeItem required>
                                 <option value="Viki">Viki</option>
                                 <option value="Faqih">Faqih</option>
                                 <option value="Yunianton">Yunianton</option>
@@ -172,8 +178,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="prioritas" class="form-label">Prioritas</label>
-                            <select class="form-select" id="prioritas" name="prioritas" data-choices data-choices-removeItem>
+                            <label for="prioritas" class="form-label required-label">Prioritas</label>
+                            <select class="form-select" id="prioritas" name="prioritas" data-choices data-choices-removeItem required>
                                 <option value="Emergency">Emergency</option>
                                 <option value="High">High</option>
                                 <option value="Medium">Medium</option>

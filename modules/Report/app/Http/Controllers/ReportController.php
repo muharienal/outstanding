@@ -121,7 +121,7 @@ class ReportController extends Controller
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'activity' => 'Delete',
-                'changed_data' => 'Equipment ' . $report->equipment,
+                'changed_data' => 'Menghapus Equipment ' . $report->equipment,
             ]);
 
             return back()->with('success', 'Data berhasil dihapus!');
@@ -129,8 +129,6 @@ class ReportController extends Controller
             return back()->with('failed', 'Data tidak berhasil dihapus!');
         }
     } catch (\Exception $e) {
-        // Log the error for debugging
-        \Log::error('Error deleting report: ' . $e->getMessage());
 
         return back()->with('failed', 'Terjadi kesalahan saat menghapus data.');
     }

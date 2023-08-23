@@ -1,34 +1,4 @@
-<div id="sidebar-menu" class="vertical-menu">
-    <!-- Logo -->
-    <div class="navbar-brand-box" style="background-color: white; margin-left: -17px; margin-top: 15px;">
-        <a href="{{ route('dashboard.index') }}" class="logo logo-light">
-            <img src="/assets/images/logo_project.webp" alt="" height="110">
-        </a>
-    </div>
-    <!-- Left Menu Start -->
-    <ul class="metismenu list-unstyled mt-5 mm-show" id="side-menu" style="zoom: 0.9;">
-        @foreach ($menus as $menu)
-            @can($menu->permission_name)
-                @foreach ($menu->items as $item)
-                    @can($item->permission_name)
-                        <li class="nav-item">
-                            <a class="nav-link menu-link{{ request()->routeIs($item->route) ? ' active' : '' }}"
-                            href="{{ route($item->route) }}">
-                                <i class="{{ $item->icon }}"></i> <span data-key="t-landing">{{ $item->name }}</span>
-                            </a>
-                        </li>
-                    @endcan
-                    <!-- end can item -->
-                @endforeach
-                <!-- end foreach items -->
-            @endcan
-            <!-- end can menu -->
-        @endforeach
-    </ul>
-    <div class="sidebar-image" style="position: absolute; bottom: 0; left: 0; width: 100%; text-align: center;">
-        <img src="/assets/images/sidebar-down.webp" alt="Sidebar Image" class="img-fluid">
-    </div>
-</div>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Noto Sans'>
 
 <style>
     .vertical-menu {
@@ -93,4 +63,40 @@
         left: 0;
         top: 0;
     }
+
+    body {
+        font-family: 'Noto Sans', sans-serif;
+    }
 </style>
+
+<div id="sidebar-menu" class="vertical-menu">
+    <!-- Logo -->
+    <div class="navbar-brand-box" style="background-color: white; margin-left: -17px; margin-top: 15px;">
+        <a href="{{ route('dashboard.index') }}" class="logo logo-light">
+            <img src="/assets/images/logo_project.webp" alt="" height="110">
+        </a>
+    </div>
+    <!-- Left Menu Start -->
+    <ul class="metismenu list-unstyled mt-5 mm-show" id="side-menu" style="zoom: 0.9;">
+        @foreach ($menus as $menu)
+            @can($menu->permission_name)
+                @foreach ($menu->items as $item)
+                    @can($item->permission_name)
+                        <li class="nav-item">
+                            <a class="nav-link menu-link{{ request()->routeIs($item->route) ? ' active' : '' }}"
+                            href="{{ route($item->route) }}">
+                                <i class="{{ $item->icon }}"></i> <span data-key="t-landing">{{ $item->name }}</span>
+                            </a>
+                        </li>
+                    @endcan
+                    <!-- end can item -->
+                @endforeach
+                <!-- end foreach items -->
+            @endcan
+            <!-- end can menu -->
+        @endforeach
+    </ul>
+    <div class="sidebar-image" style="position: absolute; bottom: 0; left: 0; width: 100%; text-align: center;">
+        <img src="/assets/images/sidebar-down.webp" alt="Sidebar Image" class="img-fluid">
+    </div>
+</div>

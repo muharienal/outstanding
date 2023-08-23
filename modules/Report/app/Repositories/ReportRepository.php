@@ -11,6 +11,7 @@ use Modules\Report\app\Interfaces\ReportInterface;
 use Modules\Report\app\Models\Report;
 use Illuminate\Support\Str;
 use App\Models\ActivityLog;
+use Carbon\Carbon;
 
 class ReportRepository implements ReportInterface
 {
@@ -83,7 +84,7 @@ class ReportRepository implements ReportInterface
             ActivityLog::create([
                 'user_id' => auth()->user()->id,
                 'activity' => 'Create',
-                'changed_data' => 'Equipment ' . $report->equipment,
+                'changed_data' => 'Menambahkan Equipment ' . $report->equipment,
             ]);
 
             // If everything succeeded, return the created report instance
@@ -145,80 +146,93 @@ class ReportRepository implements ReportInterface
     }
 
     protected function updateUser(Request $request, Report $report)
-{
-    try {
-        $validated = $this->validateUser($request);
+    {
+        try {
+            $validated = $this->validateUser($request);
 
-        $upload_foto = $this->storeAttach($request, 'upload_foto');
-        $upload_document = $this->storeAttach($request, 'upload_document');
+            $upload_foto = $this->storeAttach($request, 'upload_foto');
+            $upload_document = $this->storeAttach($request, 'upload_document');
 
-        // If upload is not provided in the request, keep the existing values
-        if (empty($upload_foto)) {
-            $upload_foto = $report->upload_foto;
-        }
-
-        if (empty($upload_document)) {
-            $upload_document = $report->upload_document;
-        }
-
-        $columnTitles = [
-            'tanggal_mulai' => 'Tanggal Mulai',
-            'show_status' => 'Show Status',
-            'unit' => 'Unit Kerja',
-            'equipment' => 'Equipment',
-            'program_kerja' => 'Program Kerja',
-            'keterangan_pekerjaan' => 'Keterangan Pekerjaan',
-            'status_pekerjaan' => 'Status Pekerjaan',
-            'progress' => 'Progress',
-            'target' => 'Target',
-            'wo_number' => 'Nomor WO',
-            'keterangan' => 'Keterangan',
-            'scope_1' => 'Scope 1',
-            'scope_2' => 'Scope 2',
-            'pic' => 'PIC',
-            'prioritas' => 'Prioritas',
-            'upload_foto' => 'Foto',
-            'upload_document' => 'Dokumen',
-        ];
-
-        $updatedColumns = [];
-        foreach ($validated as $column => $value) {
-            if ($report->$column != $value) {
-                $updatedColumns[] = $columnTitles[$column] . ' menjadi ' . $value;
+            // If upload is not provided in the request, keep the existing values
+            if (empty($upload_foto)) {
+                $upload_foto = $report->upload_foto;
             }
+
+            if (empty($upload_document)) {
+                $upload_document = $report->upload_document;
+            }
+
+            // Manually parse tanggal_mulai and target using DateTime
+            $parsedTanggalMulai = \DateTime::createFromFormat('d/m/Y', $validated['tanggal_mulai']);
+            if ($parsedTanggalMulai !== false) {
+                $validated['tanggal_mulai'] = $parsedTanggalMulai->format('Y-m-d');
+            }
+
+            $parsedTarget = \DateTime::createFromFormat('d/m/Y', $validated['target']);
+            if ($parsedTarget !== false) {
+                $validated['target'] = $parsedTarget->format('Y-m-d');
         }
 
-        // Update the report
-        $reportUpdated = $report->update(
-            array_merge(
-                $validated,
-                [
-                    'upload_foto' => $upload_foto,
-                    'upload_document' => $upload_document,
-                ]
-            )
-        );
+            $columnTitles = [
+                'tanggal_mulai' => 'Tanggal Mulai',
+                'show_status' => 'Show Status',
+                'unit' => 'Unit Kerja',
+                'equipment' => 'Equipment',
+                'program_kerja' => 'Program Kerja',
+                'keterangan_pekerjaan' => 'Keterangan Pekerjaan',
+                'status_pekerjaan' => 'Status Pekerjaan',
+                'progress' => 'Progress',
+                'target' => 'Target',
+                'wo_number' => 'Nomor WO',
+                'keterangan' => 'Keterangan',
+                'scope_1' => 'Scope 1',
+                'scope_2' => 'Scope 2',
+                'pic' => 'PIC',
+                'prioritas' => 'Prioritas',
+                'upload_foto' => 'Foto',
+                'upload_document' => 'Dokumen',
+            ];
 
-        // Ensure the report was updated successfully
-        if (!$reportUpdated) {
+            $updatedColumns = [];
+            foreach ($validated as $column => $value) {
+                if ($report->$column != $value) {
+                    // Format dates as d/m/Y
+                    $formattedValue = $column === 'tanggal_mulai' || $column === 'target' ? \DateTime::createFromFormat('Y-m-d', $value)->format('d/m/Y') : $value;
+                    $updatedColumns[] = $columnTitles[$column] . ' menjadi ' . $formattedValue;
+                }
+            }
+
+            // Update the report
+            $reportUpdated = $report->update(
+                array_merge(
+                    $validated,
+                    [
+                        'upload_foto' => $upload_foto,
+                        'upload_document' => $upload_document,
+                    ]
+                )
+            );
+
+            // Ensure the report was updated successfully
+            if (!$reportUpdated) {
+                return false;
+            }
+
+            // If the report was updated, create the activity log
+            ActivityLog::create([
+                'user_id' => auth()->user()->id,
+                'activity' => 'Update',
+                'changed_data' => 'Pada Equipment ' . $report->equipment . ', Mengubah ' . implode(', ', $updatedColumns),
+            ]);
+
+            // If everything succeeded, return the updated report instance
+            return $report;
+        } catch (Exception $e) {
+            // Handle any exceptions that might occur during the process
+            // You can log the error or take any necessary actions
             return false;
         }
-
-        // If the report was updated, create the activity log
-        ActivityLog::create([
-            'user_id' => auth()->user()->id,
-            'activity' => 'Update',
-            'changed_data' => 'Pada Equipment ' . $report->equipment . ', Mengubah ' . implode(', ', $updatedColumns),
-        ]);
-
-        // If everything succeeded, return the updated report instance
-        return $report;
-    } catch (Exception $e) {
-        // Handle any exceptions that might occur during the process
-        // You can log the error or take any necessary actions
-        return false;
     }
-}
 
 
     protected function updateSuperAdmin(Request $request, Report $report)

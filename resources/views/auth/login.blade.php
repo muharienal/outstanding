@@ -3,6 +3,53 @@
 @section('title', 'Login')
 
 @section('content')
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Noto Sans'>
+
+<style>
+    /* Custom styles for the background image */
+    body {
+        margin: 0;
+        padding: 0;
+        background-image: url('assets/images/pabrik-pg.webp');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden; /* Hide both horizontal and vertical scrollbars */
+        font-family: 'Noto Sans';
+    }
+
+    .row {
+        position: relative;
+        z-index: 1; /* Ensure the card content appears above the background */
+    }
+
+    .card {
+        margin-top: -5px;
+        padding: 1rem 2rem; /* top right bottom left */
+    }
+
+    .card.rounded-30 {
+        border-radius: 30px;
+        box-shadow: 0px 17px 20px 6px rgba(0, 0, 0, 0.20);
+    }
+
+    .form-label {
+        color: var(--gray-700, #344054);
+        font-weight: 700;
+    }
+
+    .scaled-card {
+        transform: scale(0.9); /* Scale down to 90% */
+        transform-origin: top; /* Keep top as the reference point */
+    }
+
+    .custom-text {
+        font-weight: normal; /* or any other desired font weight value */
+    }
+</style>
+
 <div class="background-container">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6 col-xl-5">
@@ -11,7 +58,7 @@
                      class="mb-4" style="width: 70%; height: auto; margin-top: -55px;" />
             </div>
             <div class="card rounded-30 scaled-card">
-                <div class="card-body p-4" style="font-family: 'Product Sans', sans-serif;">
+                <div class="card-body p-4">
                     <div class="text-center mt-2">
                         <img src="{{ asset('assets/images/logo-login.webp') }}" alt="" height="150" />
                     </div>
@@ -97,47 +144,3 @@
     });
 </script>
 @endpush
-
-<style>
-    /* Custom styles for the background image */
-    body {
-        margin: 0;
-        padding: 0;
-        background-image: url('assets/images/pabrik-pg.webp');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        min-height: 100vh;
-        position: relative;
-        overflow: hidden; /* Hide both horizontal and vertical scrollbars */
-    }
-
-    .row {
-        position: relative;
-        z-index: 1; /* Ensure the card content appears above the background */
-    }
-
-    .card {
-        margin-top: -5px;
-        padding: 1rem 2rem; /* top right bottom left */
-    }
-
-    .card.rounded-30 {
-        border-radius: 30px;
-        box-shadow: 0px 17px 20px 6px rgba(0, 0, 0, 0.20);
-    }
-
-    .form-label {
-        color: var(--gray-700, #344054);
-        font-weight: 700;
-    }
-
-    .scaled-card {
-        transform: scale(0.9); /* Scale down to 90% */
-        transform-origin: top; /* Keep top as the reference point */
-    }
-
-    .custom-text {
-        font-weight: normal; /* or any other desired font weight value */
-    }
-</style>

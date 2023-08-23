@@ -3,6 +3,7 @@
 @section('title', 'Master Data')
 
 @section('content')
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Noto Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
@@ -79,6 +80,7 @@
         margin-top: -80px;
         margin-left: -30px;
         background-color: #EFEFEF; /* Set the base background color */
+        font-family: 'Noto Sans';
     }
 
     /* Adjust container padding to accommodate the negative margins */
@@ -195,6 +197,14 @@
         color: black;
     }
 
+    #reports-table tbody tr {
+        height: 55px; /* Set the desired height */
+    }
+
+    #reports-table tbody td {
+        vertical-align: middle;
+    }
+
     /* Change font color for search bar */
     .dataTables_filter input {
         color: black;
@@ -275,6 +285,7 @@ foreach ($reports as $report) {
                 <div class="chart-container">
                     <canvas id="targetChart" width="200" height="200"></canvas>
                 </div>
+                <div class="custom-legend"></div>
             </div>
         </div>
     </div>
@@ -394,7 +405,7 @@ foreach ($reports as $report) {
                             @endif
                             @empty
                             <tr>
-                                <td colspan="9" class="text-center">Belum Ada Data</td>
+                                <td colspan="9" class="text-center">No data available in table</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -650,6 +661,94 @@ foreach ($reports as $report) {
 
     // Create the doughnut chart for "Prioritas" column
     createDoughnutChart('priorityChart', prioritasLabels, prioritasCounts, prioritasColors);
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get data from the table
+        var targetDates = [];
+        var statusCounts = {};
+
+        var tableRows = document.querySelectorAll("#reports-table tbody tr");
+        tableRows.forEach(function(row) {
+            var target = row.querySelector("td:nth-child(7)").textContent;
+            var status = row.querySelector("td:nth-child(5) button").textContent;
+
+            if (targetDates.indexOf(target) === -1) {
+                targetDates.push(target);
+            }
+
+            statusCounts[status] = statusCounts[status] || {};
+            var index = targetDates.indexOf(target);
+            statusCounts[status][index] = (statusCounts[status][index] || 0) + 1;
+        });
+
+        // Color mapping based on the status
+        var statusColors = {
+            'Rutin': '#59B44D',
+            'IP': '#FEB300',
+            'OK': '#07834D',
+            'Belum': '#C1D2CA'
+        };
+
+        // Prepare data for Chart.js
+        var datasets = [];
+        var allStatuses = Object.keys(statusCounts);
+        allStatuses.forEach(function(status) {
+            var data = targetDates.map(function(targetDate) {
+                var index = targetDates.indexOf(targetDate);
+                return statusCounts[status][index] || 0;
+            });
+
+            var color = statusColors[status]; // Get the color based on the status
+
+            datasets.push({
+                label: status,
+                data: data,
+                borderColor: color,
+                backgroundColor: color,
+                borderWidth: 2,
+                fill: true // Fill the area under the line
+            });
+        });
+
+        // Create the chart
+        var ctx = document.getElementById("targetChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: targetDates,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: {
+                            display: false // Remove x-axis grid lines
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        },
+                        grid: {
+                            display: false // Remove y-axis grid lines
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            usePointStyle: true // Display legend as square
+                        }
+                    }
+                }
+            }
+        });
+    });
 </script>
 
 @endpush
