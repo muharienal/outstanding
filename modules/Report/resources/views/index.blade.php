@@ -337,16 +337,16 @@
             <table class="table table-hover table-nowrap mb-0" id="reports-table">
                 <thead>
                     <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Show Status</th>
-                        <th scope="col">Unit</th>
-                        <th scope="col">Equipment</th>
+                        <th scope="col" style="text-align: center;">No</th>
+                        <th scope="col" style="text-align: center;">Show Status</th>
+                        <th scope="col" style="text-align: center;">Unit</th>
+                        <th scope="col" style="text-align: center;">Equipment</th>
                         <th scope="col">Program Kerja</th>
-                        <th scope="col">Status Pekerjaan</th>
-                        <th scope="col">Progress</th>
-                        <th scope="col">Target</th>
-                        <th scope="col">Prioritas</th>
-                        <th scope="col">Aksi</th>
+                        <th scope="col" style="text-align: center;">Status Pekerjaan</th>
+                        <th scope="col" style="text-align: center;">Progress</th>
+                        <th scope="col" style="text-align: center;">Target</th>
+                        <th scope="col" style="text-align: center;">Prioritas</th>
+                        <th scope="col" style="text-align: center;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -355,8 +355,8 @@
                         @endphp
                     @forelse ($reports as $report)
                         <tr class="unit-row" data-unit="{{ $report->unit }}" data-show-status="{{ $report->show_status }}" data-status-pekerjaan="{{ $report->status_pekerjaan }}" data-prioritas="{{ $report->prioritas }}">
-                            <td>{{ $counter }}</td>
-                <td>
+                            <td style="text-align: center;">{{ $counter }}</td>
+                <td style="text-align: center;">
                     @php
                         $showColor = $report->getShowColor();
                         $fontColor = in_array($showColor, ['#F44336', '#7EB45F']) ? 'white' : 'black';
@@ -365,10 +365,10 @@
                         {{ $report->show_status }}
                     </button> 
                 </td>
-                <td>{{ $report->unit }}</td>
-                <td>{{ $report->equipment }}</td>
-                <td>{{ $report->program_kerja }}</td>
-                <td>
+                <td style="text-align: center;">{{ $report->unit }}</td>
+                <td style="text-align: center;">{{ $report->equipment }}</td>
+                <td style="white-space: pre-line; width: 300px;">{{ $report->program_kerja }}</td>
+                <td style="text-align: center;">
                     @php
                         $statusColor = $report->getStatusColor();
                         $fontColor = in_array($statusColor, ['#59B44D', '#07834D']) ? 'white' : 'black';
@@ -377,9 +377,9 @@
                         {{ $report->status_pekerjaan }}
                     </button>    
                 </td>
-                <td>{{ $report->progress }}</td>
-                <td>{{ \Carbon\Carbon::parse($report->target)->format('d/m/Y') }}</td>
-                <td>
+                <td style="text-align: center;">{{ $report->progress }}%</td>
+                <td style="text-align: center;">{{ \Carbon\Carbon::parse($report->target)->format('d/m/Y') }}</td>
+                <td style="text-align: center;">
                     @php
                         $prioritasColor = $report->getPrioritasColor();
                         $fontColorPrioritas = in_array($prioritasColor, ['#F44336', '#7EB45F']) ? 'white' : 'black';
@@ -388,7 +388,7 @@
                         {{ $report->prioritas }}
                     </button>
                 </td>
-                <td>
+                <td style="text-align: center;">
                     <div class="dropdown dropup">
                         <button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" fill="none">
@@ -408,7 +408,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('modal-form-delete-report-{{ $report->id }}').submit()">
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-form-delete-report-{{ $report->id }}">
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                             </li>

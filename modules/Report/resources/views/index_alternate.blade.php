@@ -281,11 +281,11 @@ foreach ($reports as $report) {
     <div class="col-md-4 mb-4">
         <div class="card custom-card">
             <div class="card-body">
-                <h4 class="card-title mb-3 card-title-custom">Execution Target</h4>
+                <h4 class="card-title mb-3 card-title-custom">Coming Soon!</h4>
                 <div class="chart-container">
-                    <canvas id="targetChart" width="200" height="200"></canvas>
+                    <!-- <canvas id="targetChart" width="200" height="200"></canvas> -->
                 </div>
-                <div class="custom-legend"></div>
+                <!-- <div class="custom-legend"></div> -->
             </div>
         </div>
     </div>
@@ -340,15 +340,15 @@ foreach ($reports as $report) {
                 <table class="table table-hover table-nowrap mb-0" id="reports-table">
                     <thead>
                         <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Unit</th>
-                            <th scope="col">Equipment</th>
+                            <th scope="col" style="text-align: center;">No</th>
+                            <th scope="col" style="text-align: center;">Unit</th>
+                            <th scope="col" style="text-align: center;">Equipment</th>
                             <th scope="col">Program Kerja</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Progress</th>
-                            <th scope="col">Target</th>
-                            <th scope="col">Prioritas</th>
-                            <th scope="col">Detail</th>
+                            <th scope="col" style="text-align: center;">Status</th>
+                            <th scope="col" style="text-align: center;">Progress</th>
+                            <th scope="col" style="text-align: center;">Target</th>
+                            <th scope="col" style="text-align: center;">Prioritas</th>
+                            <th scope="col" style="text-align: center;">Detail</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -361,10 +361,10 @@ foreach ($reports as $report) {
                         @forelse ($reports as $report)
                         @if ($report->show_status === 'Show')
                             <tr class="unit-row" data-unit="{{ $report->unit }}" data-status-pekerjaan="{{ $report->status_pekerjaan }}" data-prioritas="{{ $report->prioritas }}">
-                                <td>{{ $counter }}</td>
-                                <td>{{ $report->unit }}</td>
-                                <td>{{ $report->equipment }}</td>
-                                <td>{{ $report->program_kerja }}</td>
+                                <td style="text-align: center;">{{ $counter }}</td>
+                                <td style="text-align: center;">{{ $report->unit }}</td>
+                                <td style="text-align: center;">{{ $report->equipment }}</td>
+                                <td style="white-space: pre-line; width: 300px;">{{ $report->program_kerja }}</td>
                                 <td>
                                     @php
                                         $statusColor = $report->getStatusColor();
@@ -374,9 +374,9 @@ foreach ($reports as $report) {
                                         {{ $report->status_pekerjaan }}
                                     </button>   
                                 </td>
-                                <td>{{ $report->progress }}</td>
-                                <td>{{ \Carbon\Carbon::parse($report->target)->format('d/m/Y') }}</td>
-                                <td>
+                                <td style="text-align: center;">{{ $report->progress }}</td>
+                                <td style="text-align: center;">{{ \Carbon\Carbon::parse($report->target)->format('d/m/Y') }}</td>
+                                <td style="text-align: center;">
                                     @php
                                         $prioritasColor = $report->getPrioritasColor();
                                         $fontColorPrioritas = in_array($prioritasColor, ['#F44336', '#7EB45F']) ? 'white' : 'black';
@@ -385,7 +385,7 @@ foreach ($reports as $report) {
                                         {{ $report->prioritas }}
                                     </button>
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
                                     <button class="btn btn-m btn-link" type="button" data-bs-toggle="modal" data-bs-target="#modal-form-show-report-{{ $report->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" fill="none">
                                             <path d="M12.8 32.0001H19.2C25.2336 32.0001 28.2512 32.0001 30.1248 30.1265C32 28.2513 32 25.2321 32 19.2001C32 13.1681 32 10.1489 30.1248 8.27531C29.5456 7.69451 28.8544 7.29451 28 7.01771V11.4545C28.0048 11.9985 28.0144 12.9121 27.6224 13.7473C27.232 14.5825 26.5248 15.1617 26.1024 15.5073C26.0608 15.5393 26.0208 15.5729 25.9856 15.6033L23.5744 17.6113C22.1984 18.7601 20.9984 19.7585 19.92 20.4529C18.76 21.1985 17.504 21.7521 16 21.7521C14.496 21.7521 13.2416 21.1985 12.08 20.4513C11.0016 19.7585 9.8032 18.7601 8.4256 17.6129L6.0144 15.6033C5.97558 15.5712 5.93665 15.5392 5.8976 15.5073C5.4752 15.1617 4.7696 14.5825 4.3776 13.7473C3.9872 12.9121 3.9936 11.9985 3.9984 11.4545L4 11.3009V7.01611C3.1456 7.29291 2.4544 7.69451 1.8752 8.27531C-1.90735e-07 10.1489 0 13.1665 0 19.2001C0 25.2337 -1.90735e-07 28.2513 1.8752 30.1265C3.7488 32.0001 6.7664 32.0001 12.8 32.0001Z" fill="#595959"/>

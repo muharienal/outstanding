@@ -21,16 +21,27 @@ class ReportController extends Controller
      *
      * @return Renderable
      */
-    public function index(
-        ReportRepository $reportRepository
-    ) {
-        $reports = $reportRepository->getAll();
-        
-        return view(
-            'report::index',
-            compact('reports')
-        );
+    public function index()
+    {
+        $reports = Report::all();
+        return view('report::index', compact('reports'));
     }
+
+    public function show(Report $report)
+    {
+        return view('report::show', compact('reports'));
+    }
+
+    public function edit(Report $report)
+    {
+        return view('report::edit', compact('reports'));
+    }
+
+    public function delete(Report $report)
+    {
+        return view('report::delete', compact('reports'));
+    }
+
     public function getChartData(ReportRepository $reportRepository): JsonResponse
     {
         $unitChartData = $reportRepository->getUnitChartData();
@@ -70,28 +81,6 @@ class ReportController extends Controller
     }
 
     /**
-     * Show the specified resource.
-     *
-     * @param  int  $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('report::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('report::edit');
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  Request  $request
@@ -128,7 +117,7 @@ class ReportController extends Controller
         } else {
             return back()->with('failed', 'Data tidak berhasil dihapus!');
         }
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
 
         return back()->with('failed', 'Terjadi kesalahan saat menghapus data.');
     }

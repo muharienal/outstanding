@@ -174,21 +174,21 @@
             <table class="table table-hover table-nowrap mb-0" id="activityLogsTable">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Aktivitas</th>
+                    <th style="text-align: center;">No</th>
+                    <th style="text-align: center;">Nama</th>
+                    <th style="text-align: center;">Aktivitas</th>
                     <th>Perubahan Data</th>
-                    <th>Timestamp</th>
+                    <th style="text-align: center;">Timestamp</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($activityLogs as $index => $activityLog)
                 <tr data-user="{{ $activityLog->user->name }}">
-                    <td class="row-number"></td>
-                    <td>{{ $activityLog->user->name }}</td>
-                    <td>{{ $activityLog->activity }}</td>
-                    <td>{{ $activityLog->changed_data }}</td>
-                    <td>{{ $activityLog->created_at->addHours(7)->format('d/m/Y H:i:s') }}</td>
+                    <td class="row-number" style="text-align: center;"></td>
+                    <td style="text-align: center;">{{ $activityLog->user->name }}</td>
+                    <td style="text-align: center;">{{ $activityLog->activity }}</td>
+                    <td style="white-space: pre-line; width: 300px;">{{ $activityLog->changed_data }}</td>
+                    <td style="text-align: center;" data-order="{{ $activityLog->created_at->timestamp }}">{{ $activityLog->created_at->addHours(7)->format('d/m/Y H:i:s') }}</td>
                 </tr>
                 @endforeach
             </tbody>

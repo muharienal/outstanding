@@ -3,6 +3,7 @@
 namespace Modules\Report\app\Repositories;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Casts\AsEncryptedArrayObject;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -12,6 +13,7 @@ use Modules\Report\app\Models\Report;
 use Illuminate\Support\Str;
 use App\Models\ActivityLog;
 use Carbon\Carbon;
+use Spatie\Activitylog\ActivitylogServiceProvider;
 
 class ReportRepository implements ReportInterface
 {
@@ -127,11 +129,7 @@ class ReportRepository implements ReportInterface
         }
 
         return $filePaths;
-    }
-
-    /**
-     * update
-     */
+    } 
     public function update(Request $request, Report $report)
     {
         if ($request->_c2VuZGVy === 'VXNlcg==') {
@@ -152,7 +150,7 @@ class ReportRepository implements ReportInterface
 
             $upload_foto = $this->storeAttach($request, 'upload_foto');
             $upload_document = $this->storeAttach($request, 'upload_document');
-
+   
             // If upload is not provided in the request, keep the existing values
             if (empty($upload_foto)) {
                 $upload_foto = $report->upload_foto;
@@ -265,6 +263,7 @@ class ReportRepository implements ReportInterface
             'prioritas'             => ['nullable', 'string'],
             'upload_foto.*'         => ['nullable', 'file'],
             'upload_document.*'     => ['nullable', 'file'],
+            
         ]);
     }
 
